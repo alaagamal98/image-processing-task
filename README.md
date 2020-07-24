@@ -24,7 +24,7 @@ python topview.py -i images/road_final.jpg
 
 Which Image | What it Looks Like
 | ------------- | ------------- 
-**Original Image:** | <img src="images/road_final.jpg" width="700px" height="350px">
-**Top View Image:** |<img src="images/top_view.PNG" width="700px" height="350px">
+**Original Image:** | <img src="images/road_final.jpg" width="650px" height="350px">
+**Top View Image:** |<img src="images/top_view.PNG" width="650px" height="350px">
 
 **The Estimated Width of the Road:** ![original](images/road_width.PNG)
