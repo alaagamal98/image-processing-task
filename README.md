@@ -22,6 +22,8 @@ python topview.py -i images/road_final.jpg
 
 ## Results
 
-**Original Image:** ![original](images/road_final.jpg)
-**Top View Image:** ![original](images/top_view.PNG)
+**Original Image:** ![original](images/road_final.jpg){: height="600px" width="600px"}
+
+**Top View Image:** ![original](images/top_view.PNG){: height="600px" width="600px"}
+
 **The Estimated Width of the Road:** ![original](images/road_width.PNG)
