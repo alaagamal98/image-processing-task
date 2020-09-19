@@ -1,6 +1,7 @@
 from transform import four_point_transform
 import argparse
 import cv2
+import numpy as np
 import imutils
 
 def BuildArgparser():
@@ -18,14 +19,14 @@ def FindContour(image):
     This function is specified for determining the contour of the box
 	in order to know the coordinates of the box in the image.
     """	
-	# convert the image to grayscale, blur it, and find edges
-	# in the image.
-	gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-	blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
-	edged_image = cv2.Canny(blurred_image, 75, 200)
-	# find the contours in the edged image, keeping only the
+	# extract the blue masks in the image.
+	imghsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+	lower_blue = np.array([110,50,50])
+	upper_blue = np.array([130,255,255])
+	mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
+	# find the blue contours in the image, keeping only the
 	# largest ones.
-	contours = cv2.findContours(edged_image.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+	contours = cv2.findContours(mask_blue.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 	contours = imutils.grab_contours(contours)
 	contours = sorted(contours, key = cv2.contourArea, reverse = True)[:5]
 	# loop over the contours

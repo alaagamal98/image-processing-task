@@ -39,24 +39,14 @@ def four_point_transform(image, points):
 	widthA = np.sqrt(((br[0] - bl[0]) ** 2) + ((br[1] - bl[1]) ** 2))
 	widthB = np.sqrt(((tr[0] - tl[0]) ** 2) + ((tr[1] - tl[1]) ** 2))
 	maxWidth = max(int(widthA), int(widthB))
-	# compute the height of the new image, which will be the
-	# maximum distance between the top-right and bottom-right
-	# y-coordinates or the top-left and bottom-left y-coordinates.
-	heightA = np.sqrt(((tr[0] - br[0]) ** 2) + ((tr[1] - br[1]) ** 2))
-	heightB = np.sqrt(((tl[0] - bl[0]) ** 2) + ((tl[1] - bl[1]) ** 2))
-	maxHeight = max(int(heightA), int(heightB))
 
 	# now that we have the dimensions of the new image, construct
 	# the set of destination points to obtain a "birds eye view".
-	
-	# but when i constructed the image it was shifted, since the maxWidth
-	# and maxHeight are regarding the box and we want top view of the entire
-	# street, so i had to add some values in all the x and y to shift 
-	# the top view to appear correctly.
-	destination_points = np.array([[185, 95],
-		[maxWidth+185 , 95],
-		[maxWidth+185 , maxHeight+95],
-		[185, maxHeight+95]], dtype = "float32")
+	destination_points = np.array([tl,
+		[maxWidth+tl[0] , tl[1]],
+		[maxWidth+tl[0] , maxWidth+tl[1]],
+		[tl[0], maxWidth+tl[1]]], dtype = "float32")
+		
 	# compute the perspective transform matrix and then warp it to
 	# the whole image size.
 	transform_matrix = cv2.getPerspectiveTransform(ordered_points, destination_points)
